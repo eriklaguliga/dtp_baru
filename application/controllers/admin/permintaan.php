@@ -70,7 +70,7 @@ Class Permintaan extends CI_Controller {
             $id = $this->uri->segment(4);
             $this->db->select('*');
             $this->db->from('tbl_nota');
-            $this->db->where('id_nota', $id);
+            $this->db->where('id_nota', $id) ;
             $this->db->join('tbl_seksi', 'tbl_seksi.id_seksi=tbl_nota.id_seksi');
             $data['nota'] = $this->db->get()->row_array();
             
@@ -94,6 +94,8 @@ Class Permintaan extends CI_Controller {
             $this->load->view('admin/permintaan/edit_user_return', $data);
         }
     }
+
+    
 
     function lihat(){
         $data['jumlah'] = $this->Model_permintaan->getjumlahnotif();
@@ -120,6 +122,10 @@ Class Permintaan extends CI_Controller {
             $this->load->view('admin/permintaan/lihat_user', $data);
         }
     }
+
+    // function lihat_bidang{
+        
+    // }
 
     function profile(){
         $data['jumlah'] = $this->Model_permintaan->getjumlahnotif();

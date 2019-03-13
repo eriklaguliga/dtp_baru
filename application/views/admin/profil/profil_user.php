@@ -206,19 +206,37 @@ $(document).ready(function(){
                   <i class="fa fa-phone" style="width:20px"></i> Sub Departement
                 </div>
               </span>
-              <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['sub_dep'] ?>"/>
+              <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['nama_seksi'] ?>"/>
               <span class="glyphicon  form-control-feedback"></span>
             </div>
             <div class="input-group">
               <span class="input-group-addon">
                 <div style="width:150px;text-align:left">
-                  <i class="fa fa-home" style="width:20px"></i>Nama Bidang
+                  <i class="fa fa-home" style="width:20px"></i>update sub bidang
                 </div>
               </span>
-              <div class="col-xs-15">
-                <input type="text" class="form-control" placeholder="** Nama Bidang" name="nama_bidang" readonly value="<?php echo $profil['nama_bidang'] ?>"/>
-                <span class="glyphicon  form-control-feedback"></span>
-              </div>
+              <div class="col-xs-4">
+                    <?php echo cmb_dinamis('nama_seksi', 'tbl_seksi', 'nama_seksi', 'nama_seksi') ?>
+                </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <div style="width:150px;text-align:left">
+                  <i class="fa fa-home" style="width:20px"></i> nama bidang
+                </div>
+              </span>
+              <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['nama_bidang'] ?>"/>
+              <span class="glyphicon  form-control-feedback"></span>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <div style="width:150px;text-align:left">
+                  <i class="fa fa-home" style="width:20px"></i>update Bidang
+                </div>
+              </span>
+              <div class="col-xs-4">
+                    <?php echo cmb_dinamis('nama_bidang', 'tbl_bidang', 'nama_bidang', 'nama_bidang') ?>
+                </div>
             </div>
             <div class="row">
               <div class="col-xs-12 col-md-6">

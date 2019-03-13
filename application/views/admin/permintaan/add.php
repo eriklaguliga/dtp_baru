@@ -54,7 +54,19 @@
                             <div class="form-group">
                                 <span class="col-xs-2" style="margin-left:10px; margin-bottom:15px; font-size:18px">Bidang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
                                 <div class="col-xs-4">
-                                     <?php echo cmb_dinamis('id_bidang', 'tbl_bidang', 'nama_bidang', 'id_bidang');  ?>
+                                <input class="form-control" type="text"
+                                <?php $seksi_user_pengguna = $this->session->userdata('nama_seksi');
+                                          $seksi_id_pengguna = $this->session->userdata('id_seksi');
+                                    $cek_database = $this->Model_permintaan->cek_seksi($seksi_user_pengguna)?>
+                                    <?php if ($cek_database->num_rows() > 0):?>
+                                    <?php 
+                                    //   $hasilbaru= $this->Model_permintaan->cekseksi($seksi_user_pengguna)?>    
+                                        value= "<?php echo $this->session->userdata('id_bidang');?> <?php echo("--") ?> <?php echo $this->session->userdata('nama_bidang') ?>"
+                                    <?php elseif ($cek_database->num_rows() < 0):?>
+                                    <?php echo cmb_dinamis('id_seksi', 'tbl_seksi', 'nama_seksi', 'id_seksi'); ?>
+
+                                    <?php endif ?>
+                                    readonly="" id="user" name="id_bidang" maxlength="50" autofocus required  />
                                 </div>
                                 <span class="col-xs-2" style="margin-left:10px; margin-bottom:15px; font-size:18px">Approver &nbsp;:</span>
                                 <div class="col-xs-3">
@@ -73,18 +85,26 @@
 
                         <div class="col-xs-12" style="margin-top:10px">
                             <div class="form-group">
-                                <span class="col-xs-2" style="margin-left:10px; margin-bottom:15px; font-size:18px">Sub Bidang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-                                <div class="col-xs-4">
-                                    <?php $user_pengguna = $this->session->userdata('nama_seksi');
-                                    $cek_database = $this->Model_permintaan->cek_seksi($user_pengguna);
-                                    if ($cek_database->num_rows() > 0 ) {
-                                        echo($this->session->userdata('nama_seksi'));
-                                    }else{
-                                        echo cmb_dinamis('id_seksi', 'tbl_seksi', 'nama_seksi', 'id_bidang');
-                                    } ?>
+                                <span class="col-xs-2" style="margin-left:10px; margin-bottom:15px; font-size:18px">sub bidang &nbsp;:</span>
+                                <div class="col-xs-3">
+                                <input class="form-control" type="text"
+                                    <?php $seksi_user_pengguna = $this->session->userdata('nama_seksi');
+                                          $seksi_id_pengguna = $this->session->userdata('id_seksi');
+                                    $cek_database = $this->Model_permintaan->cek_seksi($seksi_user_pengguna)?>
+                                    <?php if ($cek_database->num_rows() > 0):?>
+                                    <?php 
+                                    //   $hasilbaru= $this->Model_permintaan->cekseksi($seksi_user_pengguna)?>    
+                                        value= "<?php echo $seksi_id_pengguna?> <?php echo("--") ?> <?php echo $seksi_user_pengguna ?>"
+                                    <?php elseif ($cek_database->num_rows() < 0):?>
+                                    <?php echo cmb_dinamis('id_seksi', 'tbl_seksi', 'nama_seksi', 'id_seksi'); ?>
+
+                                    <?php endif ?>
+                                    readonly="" id="user" name="id_seksi" maxlength="50" autofocus required />
                                 </div>
                             </div>
                         </div>
+
+                        
                         
                         <div class="col-xs-12" style="margin-top:15px">
                             <div class="form-group">
