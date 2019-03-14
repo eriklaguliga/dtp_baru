@@ -54,17 +54,17 @@ class Auth extends CI_Controller {
                             $result = ldap_search($ldap,"",$filter) or exit("Unable to search"); 
                             $entries = ldap_get_entries($ldap,$result);
 
-                            $tbl_seksi = array();
-                            $tbl_seksi['nama_seksi'] = $entries[0][$entries[0][25]][0]; //sub bidang
-                            $this->db->select('id_seksi');
-                            $this->db->from('tbl_seksi');
-                            $this->db->where('nama_seksi', $tbl_seksi['nama_seksi']);  //sub_bidang
-                            $query=$this->db->get();
-                            $hasil = $query->row();
+                            // $tbl_seksi = array();
+                            // $tbl_seksi['nama_seksi'] = $entries[0][$entries[0][25]][0]; //sub bidang
+                            // $this->db->select('id_seksi');
+                            // $this->db->from('tbl_seksi');
+                            // $this->db->where('nama_seksi', $tbl_seksi['nama_seksi']);  //sub_bidang
+                            // $query=$this->db->get();
+                            // $hasil = $query->row();
 
-                            if ($query->num_rows() == 0){
-                                $this->db->insert('tbl_seksi', $tbl_seksi);
-                            }
+                            // if ($query->num_rows() == 0){
+                            //     $this->db->insert('tbl_seksi', $tbl_seksi);
+                            // }
                             $tbl_login = array();
                             $tbl_login['nama'] =$entries[0][$entries[0][0]][0];
                             $tbl_login['username'] =$entries[0][$entries[0][4]][0];

@@ -175,7 +175,7 @@
            $data = array(
                'nomor' => $this->input->post('nomor'),
                'disposisi' => $this->input->post('status'),
-               'id_seksi' => $this->input->post('id_seksi'),
+              //  'id_seksi' => $this->input->post('id_seksi'),
                'isi_nota' => $this->input->post('isi_nota'),
                'status'=>1,
                'last_edit' => $this->input->post('namauser'),
@@ -332,17 +332,24 @@
         return $namabidang->result_array();
       }
       function get_id_bidang($nama_bidang){
-        $query = $this->db->query("SELECT id_bidang FROM tbl_bidang WHERE nama_bidang = '$nama_bidang' LIMIT 1")->row_array();
+        $query = $this->db->query("SELECT nama_bidang FROM tbl_bidang WHERE id_bidang = '$id_bidang' LIMIT 1")->row_array();
         $hasil = $query['id_bidang'];
         return $hasil;
       }
 
-      function get_id_seksi($nama_seksi){
-        $query = $this->db->query("SELECT id_seksi FROM tbl_seksi WHERE nama_seksi = '$nama_seksi' LIMIT 1")->row_array();
-        $hasil = $query['id_seksi'];
+      function get_nama_bidang_id($id_bidang){
+        $query = $this->db->query("SELECT nama_bidang FROM tbl_bidang WHERE id_bidang = '$id_bidang' LIMIT 1")->row_array();
+        $hasil = $query['nama_bidang'];
         return $hasil;
       }
 
+      function get_nama_seksi_id($id_seksi){
+        $query = $this->db->query("SELECT nama_seksi FROM tbl_seksi WHERE id_seksi = '$id_seksi' LIMIT 1")->row_array();
+        $hasil = $query['nama_seksi'];
+        return $hasil;
+      }
+
+      
       public function last_record(){
             $last_row = $this->db->order_by('id_bidang',"DESC")
             ->limit(1)
