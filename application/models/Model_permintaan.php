@@ -253,6 +253,11 @@
         return $profil;
        }
 
+       function get_seksi(){
+        $seksi = $this->db->query("SELECT * FROM `tbl_seksi` WHERE `id_bidang` = '".$this->session->userdata('id_bidang')."' ")->result_array();
+        return $seksi;
+       }
+
       function check_password(){
         if (isset($_POST['submit'])) {
           $username = $this->session->userdata('username');
@@ -297,20 +302,39 @@
 
       function update_profile() {
         $username = $this->session->userdata('username');
-        $id_bidang = $this->get_id_bidang($this->input->post('nama_bidang'));
-        $id_seksi = $this->get_id_seksi($this->input->post('nama_seksi'));
+        $nama_bidang = $this->get_nama_bidang_id($this->input->post('bidang'));
+        $nama_seksi = $this->get_nama_seksi_id($this->input->post('seksi'));
     
            $data = array(
                'nama' => $this->input->post('nama'),
                'email' => $this->input->post('email'),
                'phone_number' => $this->input->post('phone_number'),
-               'nama_bidang' => $this->input->post('nama_bidang'),
-               'nama_seksi' => $this->input->post('nama_seksi'),
-               'id_bidang' => $id_bidang,
-               'id_seksi' => $id_seksi
+               'nama_bidang' => $nama_bidang,
+               'nama_seksi' =>$nama_seksi,
+               'id_bidang' => $this->input->post('bidang'),
+               'id_seksi' => $this->input->post('seksi')
            );
            $this->db->where('username', $username);
            $this->db->update('tbl_login', $data);
+      }
+
+      function fetch_bidang(){
+        $this->db->order_by('nama_bidang','ASC');
+        $query = $this->db->get('tbl_bidang');
+        return $query->result();
+      }
+
+      function fetch_seksi($bidang_id)
+      {
+       $this->db->where('id_bidang', $bidang_id);
+       $this->db->order_by('nama_seksi', 'ASC');
+       $query = $this->db->get('tbl_seksi');
+       $output = '<option value="">Select Bidang</option>';
+       foreach($query->result() as $row)
+       {
+        $output .= '<option value="'.$row->id_seksi.'">'.$row->nama_seksi.'</option>';
+       }
+       return $output;
       }
 
       function update_profile_un() {
@@ -332,10 +356,18 @@
         return $namabidang->result_array();
       }
       function get_id_bidang($nama_bidang){
-        $query = $this->db->query("SELECT nama_bidang FROM tbl_bidang WHERE id_bidang = '$id_bidang' LIMIT 1")->row_array();
+        $query = $this->db->query("SELECT id_bidang FROM tbl_bidang WHERE nama_bidang = '$nama_bidang' LIMIT 1")->row_array();
         $hasil = $query['id_bidang'];
         return $hasil;
       }
+
+      function get_id_seksi($nama_seksi){
+        $query = $this->db->query("SELECT id_seksi FROM tbl_seksi WHERE nama_seksi = '$nama_seksi' LIMIT 1")->row_array();
+        $hasil = $query['id_seksi'];
+        return $hasil;
+      }
+
+      
 
       function get_nama_bidang_id($id_bidang){
         $query = $this->db->query("SELECT nama_bidang FROM tbl_bidang WHERE id_bidang = '$id_bidang' LIMIT 1")->row_array();

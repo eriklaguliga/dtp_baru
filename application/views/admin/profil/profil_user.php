@@ -3,6 +3,9 @@
   <?php $this->load->view('admin/head') ?>
 <body class="hold-transition skin-blue sidebar-mini">
 
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <div class="wrapper">
 
   <?php $this->load->view('admin/header') ?>
@@ -72,6 +75,24 @@
             }
            });    
         });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#bidang').change(function(){
+        var bidang_id =$('#bidang').val();
+        if(bidang_id != ''){
+          $.ajax({
+            url:"<?php echo base_url(); ?>admin/permintaan/fetch_seksi",
+            method: "POST",
+            data:{bidang_id,bidang_id},
+            success:function(data)
+            {
+              $('#seksi').html(data);
+            }
+          });
+        }
+      });
     });
 </script>
 <script>
@@ -203,26 +224,7 @@ $(document).ready(function(){
             <div class="input-group">
               <span class="input-group-addon">
                 <div style="width:150px;text-align:left">
-                  <i class="fa fa-phone" style="width:20px"></i> Sub Departement
-                </div>
-              </span>
-              <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['nama_seksi'] ?>"/>
-              <span class="glyphicon  form-control-feedback"></span>
-            </div>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <div style="width:150px;text-align:left">
-                  <i class="fa fa-home" style="width:20px"></i>update sub bidang
-                </div>
-              </span>
-              <div class="col-xs-4">
-                    <?php echo cmb_dinamis('nama_seksi', 'tbl_seksi', 'nama_seksi', 'nama_seksi') ?>
-                </div>
-            </div>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <div style="width:150px;text-align:left">
-                  <i class="fa fa-home" style="width:20px"></i> nama bidang
+                  <i class="fa fa-phone" style="width:20px"></i> Bidang
                 </div>
               </span>
               <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['nama_bidang'] ?>"/>
@@ -231,11 +233,47 @@ $(document).ready(function(){
             <div class="input-group">
               <span class="input-group-addon">
                 <div style="width:150px;text-align:left">
-                  <i class="fa fa-home" style="width:20px"></i>update Bidang
+                  <i class="fa fa-home" style="width:20px"></i>update bidang
                 </div>
               </span>
-              <div class="col-xs-4">
-                    <?php echo cmb_dinamis('nama_bidang', 'tbl_bidang', 'nama_bidang', 'nama_bidang') ?>
+              
+              <div class="form-group">
+              <select name="bidang" id="bidang" class = "form-control input-lg"> 
+                    <option value=""> Select Bidang</option>
+                    <?php 
+                    foreach ($bidang as $row)
+                    {
+                      echo '<option value="'.$row->id_bidang.'">'.$row->nama_bidang.'</option>';
+
+                    }
+                    ?>
+                    </select>
+            
+              
+                </div>
+                
+                
+               
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <div style="width:150px;text-align:left">
+                  <i class="fa fa-home" style="width:20px"></i> nama sesksi
+                </div>
+              </span>
+              <input type="text" class="form-control" placeholder="** Sub Departement" name="sub_dep" readonly value="<?php echo $profil['nama_seksi'] ?>"/>
+              <span class="glyphicon  form-control-feedback"></span>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <div style="width:150px;text-align:left">
+                  <i class="fa fa-home" style="width:20px"></i>update seksi
+                </div>
+              </span>
+              <div class="form-group">
+                <select name="seksi" id="seksi" class="form-control input-lg">
+                <option value = "">Pilih bidang terlebih dahulu</option>
+                </select>
                 </div>
             </div>
             <div class="row">
@@ -429,3 +467,4 @@ $(function(){
   <?php $this->load->view('admin/footer') ?>
 </body>
 </html>
+

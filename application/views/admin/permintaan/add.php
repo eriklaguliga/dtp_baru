@@ -61,7 +61,7 @@
                                     <?php if ($cek_database->num_rows() > 0):?>
                                     <?php 
                                     //   $hasilbaru= $this->Model_permintaan->cekseksi($seksi_user_pengguna)?>    
-                                        value= "<?php echo $this->session->userdata('id_bidang');?> <?php echo("--") ?> <?php echo $this->session->userdata('nama_bidang') ?>"
+                                        value= "<?php echo $profil['id_bidang']?> <?php echo("--") ?> <?php echo $profil['nama_bidang']?>"
                                     <?php elseif ($cek_database->num_rows() < 0):?>
                                     <?php echo cmb_dinamis('id_seksi', 'tbl_seksi', 'nama_seksi', 'id_seksi'); ?>
 
@@ -78,7 +78,7 @@
                                     <?php elseif ($this->session->userdata('username')=="dgcouncil"):?>
                                         value="admin" 
                                     <?php endif ?>
-                                    readonly="" id="user" name="namauser" maxlength="50" autofocus required />
+                                    readonly="" id="user" name="namauser" maxlength="50" au tofocus required />
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                     <?php if ($cek_database->num_rows() > 0):?>
                                     <?php 
                                     //   $hasilbaru= $this->Model_permintaan->cekseksi($seksi_user_pengguna)?>    
-                                        value= "<?php echo $seksi_id_pengguna?> <?php echo("--") ?> <?php echo $seksi_user_pengguna ?>"
+                                        value= "<?php echo $profil['id_seksi']?> <?php echo("--") ?> <?php echo $profil['nama_seksi']; ?>"
                                     <?php elseif ($cek_database->num_rows() < 0):?>
                                     <?php echo cmb_dinamis('id_seksi', 'tbl_seksi', 'nama_seksi', 'id_seksi'); ?>
 

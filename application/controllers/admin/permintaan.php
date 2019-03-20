@@ -131,7 +131,16 @@ Class Permintaan extends CI_Controller {
         $data['jumlah'] = $this->Model_permintaan->getjumlahnotif();
         $data['hasil'] = $this->Model_permintaan->ambilnotif();
         $data['profil'] = $this->Model_permintaan->get_profile();
+        // $data['bidang'] = $this->Model_permintaan->get_bidang();
+        $data['seksi'] = $this->Model_permintaan->get_seksi();
+        $data['bidang'] = $this->Model_permintaan->fetch_bidang();
         $this->load->view('admin/profil/profil_user', $data);
+    }
+
+    function fetch_seksi(){
+        if($this->input->post('bidang_id')){
+            echo $this->Model_permintaan->fetch_seksi($this->input->post('bidang_id'));
+        }
     }
 
     function profile_up(){
@@ -141,12 +150,14 @@ Class Permintaan extends CI_Controller {
             $data['jumlah'] = $this->Model_permintaan->getjumlahnotif();
             $data['hasil'] = $this->Model_permintaan->ambilnotif();
             $data['profil'] = $this->Model_permintaan->get_profile();
+            $data['bidang'] = $this->Model_permintaan->fetch_bidang();
             redirect('admin/permintaan/profile', $data);
         } else {
             echo "Penyimpanan data gagal dilakukan";
             $data['jumlah'] = $this->Model_permintaan->getjumlahnotif();
             $data['hasil'] = $this->Model_permintaan->ambilnotif();
             $data['profil'] = $this->Model_permintaan->get_profile();
+            $data['bidang'] = $this->Model_permintaan->fetch_bidang();
             $this->load->view('admin/profil/profil_user', $data);
         }
     }
@@ -194,6 +205,8 @@ Class Permintaan extends CI_Controller {
             $this->load->view('admin/profil/profil_user', $data);
         }
     }
+
+    
     
 }
 
